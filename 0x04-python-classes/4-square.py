@@ -1,37 +1,39 @@
 #!/usr/bin/python3
-"""Square class: defines a square"""
+"""this is a square class that defines a square :)"""
 
 
 class Square:
-    """Represents a square"""
-
+    """this class defines a square"""
     def __init__(self, size=0):
-        """Initializes private square size attribute
-        Args:
-        size (int): the size of the square once instance is created"""
-
+        """this initializes a simple square"""
+        if type(size) is not int:
+            raise TypeError("size must be an integer")
+        if size < 0:
+            raise ValueError("size must be >= 0")
         self.__size = size
 
     def area(self):
-        """Initializes public square area attribute"""
-
-        return (self.__size * self.__size)
+        """this gives the area of a square"""
+        return (self.__size**2)
 
     @property
     def size(self):
-        """Initializes square size return"""
-        return (self.__size)
+        return(self.__size)
 
     @size.setter
     def size(self, value):
-        """Initializes square size attribute
-        Args:
-        value (int): the size of a size of the square"""
-
-        if type(value) != int:
+        if type(value) is not int:
             raise TypeError("size must be an integer")
+        if value < 0:
+            raise ValueError("size must be >= 0")
+        self.__size = value
+
+    def my_print(self):
+        """this prints in stdout the square with a special character"""
+        if self.__size == 0:
+            print("")
         else:
-            if value < 0:
-                raise ValueError("size must be >= 0")
-            else:
-                self.__size = value
+            for t in range(self.__size):
+                for x in range(self.__size):
+                    print("#", end="")
+                print("")
