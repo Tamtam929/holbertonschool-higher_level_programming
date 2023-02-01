@@ -2,16 +2,24 @@
 """
 12-main
 """
-pascal_triangle = __import__('12-pascal_triangle').pascal_triangle
 
 
-def print_triangle(triangle):
+def pascal_triangle(n):
     """
-    Print the triangle
+    returns a list of lists of integers
+    representing the Pascal’s triangle of n
     """
-    for row in triangle:
-        print("[{}]".format(",".join([str(x) for x in row])))
-
-
-if __name__ == "__main__":
-    print_triangle(pascal_triangle(5))
+    if n <= 0:
+        return []
+    res = []
+    l = []
+    for x in range(n):
+        row = []
+        for y in range(x + 1):
+            if x == 0 or y == 0 or x == y:
+                row.append(1)
+            else:
+                row.append(l[y] + l[y - 1])
+        l = row
+        res.append(row)
+    return res
