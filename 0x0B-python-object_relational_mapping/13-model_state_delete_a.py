@@ -12,7 +12,7 @@ if __name__ == "__main__":
     # Engine creation
     engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
                            .format(argv[1], argv[2], argv[3]))
-    
+
     # Session initializer (automatically commits and closes sessions)
     Session = sessionmaker(engine)
     session = Session()
