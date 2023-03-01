@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # Connecting to a MySQL database
     db = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
                          passwd=argv[2], db=argv[3])
-    
+
     # Getting a Cursor in MySQL Python
     cur = db.cursor()
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     cur.execute("SELECT cities.name FROM cities JOIN states \
                  ON cities.state_id=states.id WHERE states.name LIKE '{}' \
                  ORDER BY cities.id ASC".format(argv[4]))
-    
+
     # Obtaining Query Results
     rows = cur.fetchall()
     result = []
