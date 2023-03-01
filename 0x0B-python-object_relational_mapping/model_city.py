@@ -4,6 +4,7 @@ Base located in model_state"""
 from sqlalchemy import Column, ForeignKey, Integer, String
 from model_state import Base, State
 
+
 class City(Base):
     """links to the MySQL table cities"""
     __tablename__ = 'cities'
