@@ -18,12 +18,12 @@ class Rectangle {
     const aux = this.width;
     this.width = this.height;
     this.height = aux;
-   }
-
-   double () {
-     this.width = this.width *2;
-     this.height = this.height *2;
-    }
   }
+
+  double () {
+    this.width = this.width * 2;
+    this.height = this.height * 2;
+  }
+}
 
 module.exports = Rectangle;
