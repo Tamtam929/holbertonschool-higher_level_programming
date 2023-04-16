@@ -1,14 +1,17 @@
 #!/usr/bin/node
-// script that gets the contents of a webpage and stores it in a file.
-const axios = require('axios');
+/*
+ * prints the number of movies where the character "Wedge Antilles" is present
+ */
 const fs = require('fs');
-const args = process.argv.slice(2);
+const request = require('request');
 
-axios.get(args[0])
-  .then(response => {
-    fs.writeFile(process.argv[3], response.data, error => {
-      if (error) {
-        console.error(error);
-      }
+const url = process.argv[2];
+const filePath = process.argv[3];
+
+request(url, (error, response, body) => {
+  if (!error && response.statusCode === 200) {
+    fs.writeFile(filePath, body, 'utf8', (err) => {
+      if (err) throw err;
     });
-  });
+  }
+});

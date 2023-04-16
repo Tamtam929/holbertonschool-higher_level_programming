@@ -1,22 +1,20 @@
 #!/usr/bin/node
-// script that prints the title of a Star Wars movie
-const axios = require('axios');
-const args = process.argv.slice(2);
-let appearances = 0;
+/*
+ * prints the number of movies where the character "Wedge Antilles" is present
+ */
 
-axios.get(args[0])
-  .then(response => {
-    const films = response.data.results ? response.data.results : [];
-    const size = films.length;
-    for (let count = 0; count < size; count++) {
-      films[count].characters.forEach(character => {
-        if (character.includes('18')) {
-          appearances += 1;
-        }
-      });
-    }
-    console.log(appearances);
-  })
-  .catch(error => {
-    console.log('Error:', error);
-  });
+const apiUrl = process.argv[2];
+const charToSearch = 18;
+const request = require('request');
+
+request.get(apiUrl, (error, response, body) => {
+  if (error) console.log(error);
+  const data = JSON.parse(body);
+  let films = data.results;
+  films = films.filter(
+    film => film.characters.find(
+      character => character.match(charToSearch)
+    )
+  );
+  console.log(films.length);
+});

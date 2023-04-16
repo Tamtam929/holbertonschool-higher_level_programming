@@ -1,22 +1,30 @@
 #!/usr/bin/node
-// This script computes the number of tasks completed by user id.
-const axios = require('axios');
-const args = process.argv.slice(2);
+/*
+ * prints the number of movies where the character "Wedge Antilles" is present
+ */
 
-axios.get(args[0])
-  .then(response => {
-    const obj = {};
-    response.data.forEach(data => {
-      if (data.completed === true) {
-        if (obj[data.userId] === undefined) {
-          obj[data.userId] = 1;
+const request = require('request');
+
+const url = process.argv[2];
+
+request(url, function (error, response, body) {
+  if (error) {
+    console.error(error);
+    return;
+  }
+  if (response.statusCode === 200) {
+    const data = JSON.parse(body);
+    const userTasks = {};
+    data.forEach(function (task) {
+      if (task.completed) {
+        const userId = task.userId;
+        if (userTasks[userId]) {
+          userTasks[userId] += 1;
         } else {
-          obj[data.userId]++;
+          userTasks[userId] = 1;
         }
       }
     });
-    console.log(obj);
-  })
-  .catch(err => {
-    console.error('Error:', err);
-  });
+    console.log(userTasks);
+  }
+});
