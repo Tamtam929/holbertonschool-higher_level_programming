@@ -1,12 +1,12 @@
 #!/usr/bin/node
-// script that display the status code of a GET request
-const axios = require('axios');
-const args = process.argv.slice(2);
-
-axios.get(args[0])
-  .then(response => {
-    console.log('code:', response.status);
-  })
-  .catch(error => {
-    console.log('code:', error.response.status);
-  });
+/*
+ *Write a script that reads and prints the content of a file.
+ */
+ const request = require('request');
+ const url = process.argv[2];
+ 
+ request(url, (error, response) => {
+   if (!error) {
+     console.log(`code: ${response.statusCode}`);
+   }
+ });
